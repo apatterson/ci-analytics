@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :repositories [["google-api-services" "http://mavenrepo.google-api-java-client.googlecode.com/hg"]]
   :dependencies [[org.clojure/clojure "1.4.0"]
+                 [compojure "1.1.5"]
                  [com.google.apis/google-api-services-analytics "v3-rev9-1.7.0-beta"]
                  [com.google.http-client/google-http-client-jackson "1.13.1-beta"]
                  [com.google.http-client/google-http-client "1.13.1-beta"]
