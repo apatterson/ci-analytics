@@ -1,4 +1,5 @@
 (ns ci-analytics.core
+  (:require [compojure.handler :as handler])
   (:use [clojure.java.io :only [input-stream]]
         [compojure.core])
   (:import [com.google.api.client.http.javanet NetHttpTransport]
@@ -10,10 +11,10 @@
            [com.google.api.services.analytics AnalyticsScopes]
            [com.google.api.client.extensions.java6.auth.oauth2 AuthorizationCodeInstalledApp]))
 
-(defroutes handler
-  (GET "/analytics/callback" {params :params}
+(defroutes main-routes
+  (GET "/analytics/callback" [code]
        {:status 200
-        :body params})
+        :body (str code)})
   (GET "/analytics" [& more]
        (let [http (NetHttpTransport.)
              json-factory (JacksonFactory.)
@@ -39,3 +40,5 @@
             :body "ok"}
            {:status 303
             :headers {"Location" redirect}}))))
+
+(def handler (handler/site main-routes))
